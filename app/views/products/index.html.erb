@@ -1,11 +1,27 @@
+<script type="text/javascript">
+  var total = 0;
+  function calculate(item){
+    if(item.checked){
+       total+= parseFloat(item.value);
+    }else{
+       total-= parseFloat(item.value);
+    }
+    document.getElementById('totalCost').innerHTML = "$"+total.toFixed(2);
+  }
+</script>
+
+
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Products</h1>
 
+Total Amount : <b><span id="totalCost"> </span></b>
+<br><br>
+
 <table border=1>
   <thead>
     <tr>
-      <th><%= check_box_tag "selectAll" %> &nbsp; &nbsp;Select/Deselect All</th>
+    <th></th>
       <th>Name</th>
       <th>Description</th>
       <th>Price</th>
@@ -15,7 +31,7 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= check_box_tag("all_products[]", product.id, nil, id: "product_id_#{product.id.to_s}") %></td>
+      <td><input type="checkbox" value="<%=product.price%>" onclick="calculate(this)" ></td>
         <td><%= product.name %></td>
         <td><%= product.description %></td>
         <td><%= product.price %></td>
@@ -23,19 +39,3 @@
     <% end %>
   </tbody>
 </table>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#selectAll').click(function() {
-    if (this.checked) {
-      $(':checkbox').each(function() {
-        this.checked = true;
-      });
-    }
-    else {
-      $(':checkbox').each(function() {
-        this.checked = false;
-      });}
-    });
-  });
-</script>
