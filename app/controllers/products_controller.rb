@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :get_amount, only: [:step2]
 
   # GET /products
   # GET /products.json
@@ -8,7 +9,7 @@ class ProductsController < ApplicationController
   end
 
   def step2
-    total_amount = params[:total_amount]
+
   end
 
   # GET /products/1
@@ -67,6 +68,15 @@ class ProductsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def get_amount
+      total_amount = params[:total_amount]
+      if total_amount.to_i == 0
+        flash[:error] = "Please select atleast one product"
+        redirect_to products_path
+      end
+    end
+
     def set_product
       @product = Product.find(params[:id])
     end

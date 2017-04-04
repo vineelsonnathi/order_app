@@ -28,13 +28,20 @@ Total Amount : <b><span id="totalCost"> </span></b>
     </tbody>
   </table>
   <%= hidden_field_tag :total_amount %>
-  <%= submit_tag "Next", class: 'btn btn-primary', id: "step2" %>
+  <%= submit_tag "Next", id: "step2" %>
 
 <% end %>
 
 
 <script type="text/javascript">
   $(document).ready(function(){
+
+    // $("#step2").click(function(){
+    //   if ($('input[name="products"]:checked').length == 0){
+    //     alert("Please check atleast one product");
+    //   }
+    // });
+
     $('.pcs').change(function () {
       var total = 0;
       $('input[name="products"]:checked').each(function() {
