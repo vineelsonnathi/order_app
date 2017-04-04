@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
   end
 
   def step2
+    total_amount = params[:total_amount]
   end
 
   # GET /products/1

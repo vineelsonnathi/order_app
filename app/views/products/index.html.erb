@@ -27,7 +27,7 @@ Total Amount : <b><span id="totalCost"> </span></b>
       <% end %>
     </tbody>
   </table>
-  <%= hidden_field_tag :total_value %>
+  <%= hidden_field_tag :total_amount %>
   <%= submit_tag "Next", class: 'btn btn-primary', id: "step2" %>
 
 <% end %>
@@ -44,7 +44,7 @@ Total Amount : <b><span id="totalCost"> </span></b>
         }
       });
       $("#totalCost").text("$"+total.toFixed(2));
-      $("#total_value").val(total.toFixed(2));
+      $("#total_amount").val(total.toFixed(2));
     })
   });
 </script>
