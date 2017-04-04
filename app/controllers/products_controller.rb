@@ -10,10 +10,12 @@ class ProductsController < ApplicationController
   end
 
   def step2
+    @address = @user.build_address
   end
 
   def step3
-    @user.update_attributes(first_name: params["first_name"], last_name: params["last_name"])
+    @user.attributes = user_params
+    @user.save
   end
 
   # GET /products/1
@@ -83,6 +85,12 @@ class ProductsController < ApplicationController
 
     def set_product
       @product = Product.find(params[:id])
+    end
+
+    def user_params
+      params.require(:user).permit(:first_name, :middle_initial, :last_name,
+        :address_attributes => [:street_name_1, :street_name_2, :city, :state, :zip, :zip_plus_four ]
+        )
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

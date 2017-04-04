@@ -1,24 +1,44 @@
 <h1>User info</h1>
 
 Total Cart Amount: $<%= session[:total_amount] %>
-<br>
 
+<%= form_for(@user, url: {action: "step3"}) do |f| %>
+  <div class="field">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, placeholder: "First Name" %>
+  </div>
+  <div class="field">
+    <%= f.label :middle_initial %>
+    <%= f.text_field :middle_initial, placeholder: "Middle Initial" %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, placeholder: "Last Name" %>
+  </div>
 
-<%= form_tag step3_products_path, method: :get, id: 'step1' do %>
-  <table border="1">
-
+  <%= f.fields_for :address, @user.address, errors: {}, fieldset: false do |address| %>
     <div class="field">
-      First Name: <%= text_field_tag :first_name %>
+      <%= address.label :street_name_1, "Address 1" %>
+      <%= address.text_field :street_name_1, placeholder: "Address 1" %>
     </div>
-
     <div class="field">
-      Middle Initial: <%= text_field_tag :middle_initial %>
+      <%= address.label :street_name_2, "Address 2" %>
+      <%= address.text_field :street_name_2, placeholder: "Address 2" %>
     </div>
-
     <div class="field">
-      Last Name: <%= text_field_tag :last_name %>
+      <%= address.label :city %>
+      <%= address.text_field :city, placeholder: "City" %>
     </div>
+    <div class="field">
+      <%= address.label :state %>
+      <%= address.text_field :state, placeholder: "State" %>
+    </div>
+    <div class="field">
+      <%= address.label :zip %>
+      <%= address.text_field :zip, placeholder: "Zip" %> - <%= address.text_field :zip_plus_four, placeholder: "Zip+4" %>
+    </div>
+  <% end %>
 
-  </table>
-  <%= submit_tag "Next", id: "step3" %>
+  <%= f.submit "Next" %>
+
 <% end %>

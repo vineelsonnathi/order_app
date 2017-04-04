@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :products do
     get :step1, on: :collection
     get :step2, on: :collection
-    get :step3, on: :collection
+    patch :step3, on: :collection
   end
 
   root to: "products#step1"
