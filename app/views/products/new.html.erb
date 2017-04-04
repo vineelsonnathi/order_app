@@ -1,34 +1,41 @@
 <h1>New Product</h1>
 
-<%= form_for(@product) do |f| %>
-  <% if @product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+<%= form_tag step2_products_path, method: :post, id: 'step1' do %>
 
-      <ul>
-      <% @product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <table border="1">
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+      <tr>
+        <th><%= check_box_tag "selectAll" %> &nbsp; &nbsp;Select/Deselect All</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+
+      <tr>
+        <tr>
+          <%= check_box_tag("all_products[]", product.id, nil, id: "product_id_#{product.id.to_s}") %>
+        </tr>
+        <tr> <%= text_field_tag :name %> </tr>
+        <tr> <%= text_field_tag :description %> </tr>
+        <tr> <%= text_field_tag :price %> </tr>
+      </tr>
+  </table>
+  <%= submit_tag "Next", class: 'btn btn-primary', id: "step2" %>
+
 <% end %>
 
-
-<%= link_to 'Back', products_path %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#selectAll').click(function() {
+    if (this.checked) {
+      $(':checkbox').each(function() {
+        this.checked = true;
+      });
+    }
+    else {
+      $(':checkbox').each(function() {
+        this.checked = false;
+      });}
+    });
+  });
+</script>
