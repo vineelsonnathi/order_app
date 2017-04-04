@@ -1,0 +1,16 @@
+<h1>User info</h1>
+
+Total Cart Amount: $<%= session[:total_amount] %>
+<br>
+
+<%= form_tag step3_products_path, method: :get, id: 'step1' do %>
+  <table border="1">
+    <div class="field">
+      First Name: <%= text_field_tag :first_name %>
+    </div>
+    <div class="field">
+      Last Name: <%= text_field_tag :last_name %>
+    </div>
+  </table>
+  <%= submit_tag "Next", id: "step3" %>
+<% end %>

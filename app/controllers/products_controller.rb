@@ -1,15 +1,19 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :get_amount, only: [:step2]
+  before_action :find_user, only: [:step2, :step3]
 
   # GET /products
   # GET /products.json
-  def index
+  def step1
     @products = Product.all
   end
 
   def step2
+  end
 
+  def step3
+    @user.update_attributes(first_name: params["first_name"], last_name: params["last_name"])
   end
 
   # GET /products/1
@@ -71,9 +75,9 @@ class ProductsController < ApplicationController
 
     def get_amount
       total_amount = params[:total_amount]
+      session[:total_amount] = total_amount
       if total_amount.to_i == 0
-        flash[:error] = "Please select atleast one product"
-        redirect_to products_path
+        redirect_to products_path, notice: 'Please select atleast one product'
       end
     end
 
@@ -84,5 +88,9 @@ class ProductsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params.require(:product).permit(:name, :description, :price)
+    end
+
+    def find_user
+      @user = User.find_by_email(current_user.email)
     end
 end
