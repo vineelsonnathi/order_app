@@ -18,31 +18,33 @@ Total Amount : <b><span id="totalCost"> </span></b>
     <tbody>
       <% @products.each do |product| %>
         <tr>
-        <td><input type="checkbox" value="<%=product.price%>" onclick="calculate(this)" ></td>
+          <td><input type="checkbox" value="<%=product.price%>" name="products" class="pcs" ></td>
+          </td>
           <td><%= product.name %></td>
           <td><%= product.description %></td>
           <td><%= product.price %></td>
-          <%= hidden_field_tag :total_value %>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <%= hidden_field_tag :total_value %>
   <%= submit_tag "Next", class: 'btn btn-primary', id: "step2" %>
 
 <% end %>
 
 
 <script type="text/javascript">
-  var total = 0;
-  function calculate(item){
-    if(item.checked){
-       total+= parseFloat(item.value);
-    }else{
-       total-= parseFloat(item.value);
-    }
-    if (total < 0){
-      total = 0
-    }
-    document.getElementById('totalCost').innerHTML = "$"+total.toFixed(2);
-  }
+  $(document).ready(function(){
+    $('.pcs').change(function () {
+      var total = 0;
+      $('input[name="products"]:checked').each(function() {
+        total+= parseFloat(this.value);
+        if (total < 0){
+          total = 0
+        }
+      });
+      $("#totalCost").text("$"+total.toFixed(2));
+      $("#total_value").val(total.toFixed(2));
+    })
+  });
 </script>
