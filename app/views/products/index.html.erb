@@ -1,3 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Products</h1>
+
+Total Amount : <b><span id="totalCost"> </span></b>
+<br><br>
+<%= form_tag step2_products_path, method: :post, id: 'step1' do %>
+  <table border=1>
+    <thead>
+      <tr>
+      <th></th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+        <td><input type="checkbox" value="<%=product.price%>" onclick="calculate(this)" ></td>
+          <td><%= product.name %></td>
+          <td><%= product.description %></td>
+          <td><%= product.price %></td>
+          <%= hidden_field_tag :total_value %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= submit_tag "Next", class: 'btn btn-primary', id: "step2" %>
+
+<% end %>
+
+
 <script type="text/javascript">
   var total = 0;
   function calculate(item){
@@ -6,36 +40,9 @@
     }else{
        total-= parseFloat(item.value);
     }
+    if (total < 0){
+      total = 0
+    }
     document.getElementById('totalCost').innerHTML = "$"+total.toFixed(2);
   }
 </script>
-
-
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Products</h1>
-
-Total Amount : <b><span id="totalCost"> </span></b>
-<br><br>
-
-<table border=1>
-  <thead>
-    <tr>
-    <th></th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-      <td><input type="checkbox" value="<%=product.price%>" onclick="calculate(this)" ></td>
-        <td><%= product.name %></td>
-        <td><%= product.description %></td>
-        <td><%= product.price %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
