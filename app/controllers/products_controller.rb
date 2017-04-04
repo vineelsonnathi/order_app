@@ -8,7 +8,6 @@ class ProductsController < ApplicationController
   end
 
   def step2
-    binding.pry
   end
 
   # GET /products/1
