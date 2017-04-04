@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404200902) do
+ActiveRecord::Schema.define(version: 20170404215433) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "user_id",       limit: 4
+    t.string  "street_name_1", limit: 255
+    t.string  "street_name_2", limit: 255
+    t.string  "city",          limit: 255
+    t.string  "state",         limit: 255
+    t.string  "zip",           limit: 255
+    t.string  "zip_plus_four", limit: 255
+  end
+
+  add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -24,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170404200902) do
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "first_name",             limit: 255
+    t.string   "middle_initial",         limit: 255
     t.string   "last_name",              limit: 255
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255
@@ -41,4 +54,5 @@ ActiveRecord::Schema.define(version: 20170404200902) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "addresses", "users"
 end
