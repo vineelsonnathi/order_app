@@ -2,6 +2,18 @@
 
 Total Cart Amount: $<%= session[:total_amount] %>
 
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this record from being saved:</h2>
+
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for(@user, url: {action: "step3"}) do |f| %>
   <div class="field">
     <%= f.label :first_name %>
@@ -35,7 +47,7 @@ Total Cart Amount: $<%= session[:total_amount] %>
     </div>
     <div class="field">
       <%= address.label :zip %>
-      <%= address.text_field :zip, placeholder: "Zip" %> - <%= address.text_field :zip_plus_four, placeholder: "Zip+4" %>
+      <%= address.text_field :zip, placeholder: "Zip" %>
     </div>
   <% end %>
 

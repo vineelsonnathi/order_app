@@ -11,12 +11,15 @@ class ProductsController < ApplicationController
   end
 
   def step2
-    @address = @user.build_address
+    @user.build_address if !@user.address.present?
   end
 
   def step3
     @user.attributes = user_params
-    @user.save
+    if @user.save
+    else
+      render :step2
+    end
   end
 
   # GET /products/1

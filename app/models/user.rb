@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_one :address
   accepts_nested_attributes_for :address
 
+  validates_presence_of :first_name, :last_name, message: "can't be blank"
+
   def full_name
     first_name + ", " + middle_initial + ", " + last_name
   end
