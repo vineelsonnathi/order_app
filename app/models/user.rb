@@ -10,10 +10,15 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name, message: "can't be blank"
 
   def full_name
-    first_name + ", " + middle_initial + ", " + last_name
+    self.try(:first_name) + ", " +
+    self.try(:middle_initial) + ", " +
+    self.try(:last_name)
   end
 
   def home_address
-    address.street_name_1 + ", " + address.street_name_2 + ", " + address.city + ", " + address.zip + ", " + address.zip_plus_four
+    address.try(:street_name_1) + ", " +
+    address.try(:street_name_2) + ", " +
+    address.try(:city) + ", " +
+    address.try(:zip)
   end
 end
