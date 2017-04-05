@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
 
   # GET /products
   # GET /products.json
+
   def step1
     @products = Product.all
   end
@@ -79,7 +80,7 @@ class ProductsController < ApplicationController
       total_amount = params[:total_amount]
       session[:total_amount] = total_amount
       if total_amount.to_i == 0
-        redirect_to products_path, notice: 'Please select atleast one product'
+        redirect_to step1_products_path, notice: 'Please select atleast one product'
       end
     end
 
