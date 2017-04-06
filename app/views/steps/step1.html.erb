@@ -21,7 +21,7 @@ Total Amount : <b><span id="totalCost"> </span></b>
           <td><input type="checkbox" value="<%=product.price%>" name="products" class="pcs" ></td>
           </td>
           <td><%= product.name %></td>
-          <td><%= product.price %></td>
+          <td>$<%= product.price %></td>
           <td><%= link_to 'Show', product %></td>
           <td><%= link_to 'Edit', edit_product_path(product) %></td>
           <td>
