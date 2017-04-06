@@ -1,26 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :get_amount, only: [:step2]
-  before_action :find_user, only: [:step2, :step3]
 
   # GET /products
   # GET /products.json
-
-  def step1
-    @products = Product.all
-  end
-
-  def step2
-    @user.build_address if !@user.address.present?
-  end
-
-  def step3
-    @user.attributes = user_params
-    if @user.save
-    else
-      render :step2
-    end
-  end
 
   # GET /products/1
   # GET /products/1.json
@@ -71,7 +53,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to step1_products_path, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to step1_steps_path, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -79,22 +61,8 @@ class ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
 
-    def get_amount
-      total_amount = params[:total_amount]
-      session[:total_amount] = total_amount
-      if total_amount.to_i == 0
-        redirect_to step1_products_path, notice: 'Please select atleast one product'
-      end
-    end
-
     def set_product
       @product = Product.find(params[:id])
-    end
-
-    def user_params
-      params.require(:user).permit(:first_name, :middle_initial, :last_name,
-        :address_attributes => [:street_name_1, :street_name_2, :city, :state, :zip, :zip_plus_four ]
-        )
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -102,7 +70,4 @@ class ProductsController < ApplicationController
       params.require(:product).permit(:name, :description, :price)
     end
 
-    def find_user
-      @user = User.find_by_email(current_user.email)
-    end
 end

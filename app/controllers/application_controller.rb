@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
 
   def record_not_found
     session[:total_amount] = nil
-    redirect_to step1_products_path
+    redirect_to step1_steps_path
   end
 end

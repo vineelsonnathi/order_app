@@ -47,7 +47,7 @@ Total Cart Amount: $<%= session[:total_amount] %>
     </div>
     <div class="field">
       <%= address.label :zip %>
-      <%= address.text_field :zip, placeholder: "Zip" %>
+      <%= address.text_field :zip, placeholder: "Zip", maxlength: 5 %>
     </div>
   <% end %>
 
