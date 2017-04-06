@@ -17,10 +17,17 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
     <%= f.label :price %><br>
     <%= f.text_field :price %>
   </div>
+
+  <div class="field">
+    <%= f.label :product_date %><br>
+    <%= f.text_field :product_date, class: "datepicker" %>
+  </div>
+
     <div class="field">
       <%= f.label "Select Product Type" %><br>
       <%= f.select :product_type_id, options_for_select(Product.all_product_types), {include_blank: true} %>
@@ -32,3 +39,9 @@
 
 
 <%= link_to 'Back', step1_steps_path %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>
