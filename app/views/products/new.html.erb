@@ -18,13 +18,13 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
     <%= f.label :price %><br>
     <%= f.text_field :price %>
   </div>
+    <div class="field">
+      <%= f.label "Select Product Type" %><br>
+      <%= f.select :product_type_id, options_for_select(Product.all_product_types), {include_blank: true} %>
+    </div>
   <div class="actions">
     <%= f.submit %>
   </div>
