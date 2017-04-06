@@ -11,16 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406185053) do
+ActiveRecord::Schema.define(version: 20170406214343) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id",       limit: 4
-    t.string  "street_name_1", limit: 255
-    t.string  "street_name_2", limit: 255
+    t.string  "address_1",     limit: 255
+    t.string  "address_2",     limit: 255
     t.string  "city",          limit: 255
     t.string  "state",         limit: 255
     t.string  "zip",           limit: 255
     t.string  "zip_plus_four", limit: 255
+    t.string  "first_name",    limit: 255
+    t.string  "last_name",     limit: 255
+    t.string  "product_ids",   limit: 255
   end
 
   add_index "addresses", ["user_id"], name: "index_addresses_on_user_id", using: :btree

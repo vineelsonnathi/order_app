@@ -2,54 +2,53 @@
 
 Total Cart Amount: $<%= session[:total_amount] %>
 
-<% if @user.errors.any? %>
+<% if @address.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this record from being saved:</h2>
+    <h2><%= pluralize(@address.errors.count, "error") %> prohibited this record from being saved:</h2>
 
     <ul>
-    <% @user.errors.full_messages.each do |message| %>
+    <% @address.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
     </ul>
   </div>
 <% end %>
 
-<%= form_for(@user, url: {action: "step3"}) do |f| %>
+<%= form_for(@address, url: {action: "step3"}) do |f| %>
   <div class="field">
     <%= f.label :first_name %>
     <%= f.text_field :first_name, placeholder: "First Name" %>
   </div>
-  <div class="field">
-    <%= f.label :middle_initial %>
-    <%= f.text_field :middle_initial, placeholder: "Middle Initial" %>
-  </div>
+
   <div class="field">
     <%= f.label :last_name %>
     <%= f.text_field :last_name, placeholder: "Last Name" %>
   </div>
 
-  <%= f.fields_for :address, @user.address, errors: {}, fieldset: false do |address| %>
-    <div class="field">
-      <%= address.label :street_name_1, "Address 1" %>
-      <%= address.text_field :street_name_1, placeholder: "Address 1" %>
-    </div>
-    <div class="field">
-      <%= address.label :street_name_2, "Address 2" %>
-      <%= address.text_field :street_name_2, placeholder: "Address 2" %>
-    </div>
-    <div class="field">
-      <%= address.label :city %>
-      <%= address.text_field :city, placeholder: "City" %>
-    </div>
-    <div class="field">
-      <%= address.label :state %>
-      <%= address.text_field :state, placeholder: "State" %>
-    </div>
-    <div class="field">
-      <%= address.label :zip %>
-      <%= address.text_field :zip, placeholder: "Zip", maxlength: 5 %>
-    </div>
-  <% end %>
+  <div class="field">
+    <%= f.label :address_1, "Address 1" %>
+    <%= f.text_field :address_1, placeholder: "Address 1" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address_2, "Address 2" %>
+    <%= f.text_field :address_2, placeholder: "Address 2" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :city %>
+    <%= f.text_field :city, placeholder: "City" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :state %>
+    <%= f.text_field :state, placeholder: "State" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :zip %>
+    <%= f.text_field :zip, placeholder: "Zip", maxlength: 5 %>
+  </div>
 
   <%= f.submit "Next" %>
 

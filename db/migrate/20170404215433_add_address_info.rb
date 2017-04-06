@@ -1,7 +1,7 @@
 class AddAddressInfo < ActiveRecord::Migration
   def change
     create_table :addresses do |t|
-      t.belongs_to :user, foreign_key: true, index: true
+      # t.belongs_to :user, foreign_key: true, index: true
       t.string :street_name_1
       t.string :street_name_2
       t.string :city

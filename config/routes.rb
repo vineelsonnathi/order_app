@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :steps do
     get :step1, on: :collection
     get :step2, on: :collection
-    patch :step3, on: :collection
+    post :step3, on: :collection
   end
 
   root to: "steps#step1"

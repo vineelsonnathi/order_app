@@ -11,12 +11,12 @@ class StepsController < ApplicationController
   end
 
   def step2
-    @user.build_address if !@user.address.present?
+    @address = Address.new
   end
 
   def step3
-    @user.attributes = user_params
-    if @user.save
+    @address = Address.new(address_params)
+    if @address.save
     else
       render :step2
     end
@@ -36,10 +36,8 @@ class StepsController < ApplicationController
     @user = User.find_by_email(current_user.email)
   end
 
-  def user_params
-    params.require(:user).permit(:first_name, :middle_initial, :last_name,
-      :address_attributes => [:street_name_1, :street_name_2, :city, :state, :zip, :zip_plus_four ]
-      )
+  def address_params
+    params.require(:address).permit(:address_1, :address_2, :city, :state, :zip, :first_name, :last_name, :product_ids)
   end
 
   def set_step
