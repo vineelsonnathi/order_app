@@ -21,6 +21,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+    params["product"]["product_date"] = DateTime.strptime(params["product"]["product_date"], '%m/%d/%Y').try(:to_date)
     @product = Product.new(product_params)
 
     respond_to do |format|
