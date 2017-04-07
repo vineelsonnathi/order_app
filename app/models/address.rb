@@ -2,7 +2,7 @@ class Address < ActiveRecord::Base
 
   serialize :product_ids, Array
 
-  validates_presence_of :first_name, :last_name, :address_1, :city, :state, :zip, message: "can't be blank"
+  validates_presence_of :first_name, :last_name, :phone_number, :email, :address_1, :city, :state, :zip, message: "can't be blank"
 
 
 
@@ -17,6 +17,11 @@ class Address < ActiveRecord::Base
     addr += state + ", "
     addr += zip
     addr
+  end
+
+ # may need this for future report generation.
+  def products
+    Product.where(id: product_ids)
   end
 
 end

@@ -39,7 +39,7 @@ class StepsController < ApplicationController
   end
 
   def address_params
-    params.require(:address).permit(:address_1, :address_2, :city, :state, :zip, :first_name, :last_name, :product_ids)
+    params.require(:address).permit(:address_1, :address_2, :city, :state, :zip, :first_name, :last_name, :product_ids, :email, :phone_number)
   end
 
   def set_step

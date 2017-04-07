@@ -26,6 +26,16 @@ Total Cart Amount: $<%= session[:total_amount] %>
   </div>
 
   <div class="field">
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone_number, placeholder: "Phone Number" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email, placeholder: "Email" %>
+  </div>
+
+  <div class="field">
     <%= f.label :address_1, "Address 1" %>
     <%= f.text_field :address_1, placeholder: "Address 1" %>
   </div>
