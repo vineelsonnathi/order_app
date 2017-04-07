@@ -19,8 +19,7 @@ Total Amount : <b><span id="totalCost"> </span></b>
     <tbody>
       <% @products.each do |product| %>
         <tr>
-          <td><input type="checkbox" value="<%=product.price%>" name="products" class="pcs" ></td>
-          </td>
+          <td><%= check_box_tag 'product_ids[]',"#{product.price},#{product.id}", nil, class: 'pcs' %></td>
           <td><%= product.name %></td>
           <td>$<%= product.price %></td>
           <td><%= product.product_date.present? ? product.product_date.strftime("%m/%d/%Y") : "" %></td>
@@ -34,7 +33,6 @@ Total Amount : <b><span id="totalCost"> </span></b>
     </tbody>
   </table>
   <%= hidden_field_tag :total_amount %>
-
   <br>
   <%= submit_tag "Next", id: "step2" %>
 
@@ -53,7 +51,7 @@ Total Amount : <b><span id="totalCost"> </span></b>
 
     $('.pcs').change(function () {
       var total = 0;
-      $('input[name="products"]:checked').each(function() {
+      $('input[type=checkbox]:checked').each(function() {
         total+= parseFloat(this.value);
         if (total < 0){
           total = 0

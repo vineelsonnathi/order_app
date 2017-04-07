@@ -11,11 +11,13 @@ class StepsController < ApplicationController
   end
 
   def step2
+    session[:product_ids] = params[:product_ids].map{|t| t.split(",").last.to_i} if params[:product_ids].present?
     @address = Address.new
   end
 
   def step3
     @address = Address.new(address_params)
+    @address.product_ids = session[:product_ids]
     if @address.save
     else
       render :step2

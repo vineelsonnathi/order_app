@@ -1,5 +1,7 @@
 class Address < ActiveRecord::Base
 
+  serialize :product_ids, Array
+
   validates_presence_of :first_name, :last_name, :address_1, :city, :state, :zip, message: "can't be blank"
 
 
